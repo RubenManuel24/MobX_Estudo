@@ -30,7 +30,7 @@ Controller controller = Controller();
             padding: EdgeInsets.all(25),
             child: Observer(
               builder: (_){
-                return Text("${controller.getContador}",
+                return Text("${controller.contador}",
                   style: TextStyle(
                   fontSize: 30
                  ),
