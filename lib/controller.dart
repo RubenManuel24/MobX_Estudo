@@ -24,6 +24,12 @@ String email = "";
 @observable
 String senha = "";
 
+@observable
+bool carregar = false;
+
+@observable
+bool logado = false;
+
 @computed
 String get emailSenha => "$email - $senha";
 
@@ -35,6 +41,22 @@ void setEmail(String valor) => email = valor;
 
 @action
 void setSenha(String valor) => senha = valor;
+
+@action
+Future<void> logar() async {
+
+  carregar = true;
+
+  //carregando
+
+  await Future.delayed(Duration(seconds: 5));
+
+  carregar = false;
+  
+  //usuario logado
+  logado = true;
+
+}
 
 
   

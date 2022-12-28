@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx_aula/controller.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,6 +19,31 @@ class _HomeState extends State<Home> {
 // }
 
 Controller controller = Controller();
+ReactionDisposer? reactionDisposer;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+     
+     //autorun((_){
+       //print(controller.validarCampos);
+     //});
+
+    reactionDisposer = reaction(
+      (_){controller.logado;}, 
+      (valor){
+        if(valor == true){
+          print("Logado com sucesso!!!");
+        }
+      }
+      );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    reactionDisposer!();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -75,16 +101,18 @@ Controller controller = Controller();
               builder: (_){
                 return TextButton(
               onPressed: controller.validarCampos
-                  ? (){}
+                  ? (){controller.logar();}
                   : null,
-              child: Text("Logar",
-              style: TextStyle(
-              color: Colors.white
-            ),
-              ),
+              child: controller.carregar 
+                  ? CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.white),)
+                  : Text("Logar",
+                     style: TextStyle(
+                     color: Colors.white
+                     ),
+                  ),
               style: TextButton.styleFrom(backgroundColor : 
                  controller.validarCampos
-                  ?   Colors.deepPurple
+                  ?  Colors.deepPurple
                   :  Colors.red
                 ),
               );
