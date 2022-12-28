@@ -26,30 +26,69 @@ Controller controller = Controller();
         padding: EdgeInsets.all(16),
         child: Column(
         children: [
+          /*
           Padding(
             padding: EdgeInsets.all(25),
             child: Observer(
               builder: (_){
-                return Text("${controller.contador}",
+                return Text("",
                   style: TextStyle(
                   fontSize: 30
                  ),
                );
               })
             ),
+            */
             Padding(
             padding: EdgeInsets.all(16),
-            child: TextButton(
-              onPressed: (){
-                controller.incrementar();
-              }, 
-              child: Text("Adicionar",
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: "Email"
+              ),
+              onChanged: controller.setEmail,
+            )
+            ),
+            Padding(
+            padding: EdgeInsets.all(16),
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: "Senha"
+              ),
+              onChanged: controller.setSenha,
+            )
+            ),
+             Padding(
+            padding: EdgeInsets.all(16),
+            child: Observer(
+              builder: (_){
+                return Text( 
+                  controller.validarCampos
+                  ? "* Campos válidos!" 
+                  : "* Campos não válidos!" 
+                  
+              );
+              })
+            ),
+            Padding(
+            padding: EdgeInsets.all(16),
+            child: Observer(
+              builder: (_){
+                return TextButton(
+              onPressed: controller.validarCampos
+                  ? (){}
+                  : null,
+              child: Text("Logar",
               style: TextStyle(
               color: Colors.white
             ),
               ),
-              style: TextButton.styleFrom(backgroundColor: Colors.deepPurple),
-              )
+              style: TextButton.styleFrom(backgroundColor : 
+                 controller.validarCampos
+                  ?   Colors.deepPurple
+                  :  Colors.red
+                ),
+              );
+              })
             )
         ],),
        ),

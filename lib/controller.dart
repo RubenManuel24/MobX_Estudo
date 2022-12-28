@@ -5,14 +5,46 @@ part 'controller.g.dart';
 
 //a utilizacao do mixin Store é para geracao dos codigos automaticos
 abstract class ControllerBase with Store {
-  
-  @observable
-  int contador = 0;
 
-  @action
-  incrementar(){
-    contador++;
-  }
+ControllerBase(){
+  //AutoRun é executa sempre que um Observable tiver um estado alterado
+   /*
+  autorun((_){
+    print("AutoRun Email: " +email );
+    print("AutoRun Senha: " +senha );
+    print("AutoRun EmailSenha: " +emailSenha );
+
+  });
+  */
+}
+
+@observable
+String email = "";
+
+@observable
+String senha = "";
+
+@computed
+String get emailSenha => "$email - $senha";
+
+@computed
+bool get validarCampos => email.length >= 5 && senha.length >= 5;
+
+@action
+void setEmail(String valor) => email = valor;
+
+@action
+void setSenha(String valor) => senha = valor;
+
+
+  
+  //@observable
+  // int contador = 0;
+
+  //@action
+  //incrementar(){
+   // contador++;
+  //}
 
   /*
   Controller(){
