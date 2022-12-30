@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_aula/item_controller.dart';
 import 'package:mobx_aula/principal_controller.dart';
 
 class Principal extends StatefulWidget {
@@ -10,6 +12,7 @@ class Principal extends StatefulWidget {
 class _PrincipalState extends State<Principal> {
 
   PrincipalController _principalController = PrincipalController();
+
 
   _dialog(){
     showDialog(
@@ -34,6 +37,7 @@ class _PrincipalState extends State<Principal> {
               TextButton(
                   onPressed: (){
                     _principalController.listar();
+                     Navigator.pop(context);
                   },
                   child: Text("Salvar")
               )
@@ -56,12 +60,36 @@ class _PrincipalState extends State<Principal> {
         return ListView.builder(
         itemCount: _principalController.listaItem.length,
         itemBuilder: (_, indice){
-          return ListTile(
-            title: Text(_principalController.listaItem[indice]),
+          //item é do tipo ItemController
+          var item = _principalController.listaItem[indice];
+          return Observer(
+            builder: (_){
+              return ListTile(
+            title: Text(
+              item.titulo,
+              style: TextStyle(
+                decoration:  item.marcado 
+                  ? TextDecoration.combine(
+                    [
+                      TextDecoration.lineThrough,
+                      TextDecoration.underline
+                    ]
+                  )
+                  : null
+              ),
+            ),
+            leading: Checkbox(
+              value: item.marcado, 
+              onChanged: (valor){
+                item.alterarMarcado(valor!);
+              },
+              ),
             onTap: (){
-
+              item.marcado = !item.marcado;
             },
           );
+
+            });
         },
       );
       }),
