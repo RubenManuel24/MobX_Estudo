@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_aula/controller.dart';
+import 'package:mobx_aula/principal.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -30,11 +31,13 @@ ReactionDisposer? reactionDisposer;
      //});
 
     reactionDisposer = reaction(
-      (_){controller.logado;}, 
-      (valor){
-        if(valor == true){
-          print("Logado com sucesso!!!");
-        }
+      (_)=> controller.logado, 
+      (usuarioLogado){
+       if(usuarioLogado == true){
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => Principal())
+          );
+       }
       }
       );
   }
