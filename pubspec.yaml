@@ -36,12 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   mobx: ^2.1.3 #Core da biblioteca
   flutter_mobx: ^2.0.6+5 #plugin para widget "Observer"
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mobx_codegen: ^2.1.1
   build_runner: ^2.3.3
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

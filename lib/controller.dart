@@ -19,6 +19,9 @@ ControllerBase(){
 }
 
 @observable
+String nome = "";
+
+@observable
 String email = "";
 
 @observable
@@ -34,7 +37,10 @@ bool logado = false;
 String get emailSenha => "$email - $senha";
 
 @computed
-bool get validarCampos => email.length >= 5 && senha.length >= 5;
+bool get validarCampos => nome.contains(' ') && email.length >= 5 && senha.length >= 5;
+
+@action
+void setNome(String valor) => nome = valor;
 
 @action
 void setEmail(String valor) => email = valor;

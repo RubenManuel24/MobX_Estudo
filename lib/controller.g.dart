@@ -24,6 +24,21 @@ mixin _$Controller on ControllerBase, Store {
               name: 'ControllerBase.validarCampos'))
           .value;
 
+  late final _$nomeAtom = Atom(name: 'ControllerBase.nome', context: context);
+
+  @override
+  String get nome {
+    _$nomeAtom.reportRead();
+    return super.nome;
+  }
+
+  @override
+  set nome(String value) {
+    _$nomeAtom.reportWrite(value, super.nome, () {
+      super.nome = value;
+    });
+  }
+
   late final _$emailAtom = Atom(name: 'ControllerBase.email', context: context);
 
   @override
@@ -98,6 +113,17 @@ mixin _$Controller on ControllerBase, Store {
       ActionController(name: 'ControllerBase', context: context);
 
   @override
+  void setNome(String valor) {
+    final _$actionInfo = _$ControllerBaseActionController.startAction(
+        name: 'ControllerBase.setNome');
+    try {
+      return super.setNome(valor);
+    } finally {
+      _$ControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setEmail(String valor) {
     final _$actionInfo = _$ControllerBaseActionController.startAction(
         name: 'ControllerBase.setEmail');
@@ -122,6 +148,7 @@ mixin _$Controller on ControllerBase, Store {
   @override
   String toString() {
     return '''
+nome: ${nome},
 email: ${email},
 senha: ${senha},
 carregar: ${carregar},

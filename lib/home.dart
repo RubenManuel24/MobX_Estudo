@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_aula/controller.dart';
 import 'package:mobx_aula/principal.dart';
+import 'package:provider/provider.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
 // });
 // }
 
-Controller controller = Controller();
+late Controller controller;
 ReactionDisposer? reactionDisposer;
 
   @override
@@ -29,6 +30,8 @@ ReactionDisposer? reactionDisposer;
      //autorun((_){
        //print(controller.validarCampos);
      //});
+     
+    controller = Provider.of<Controller>(context);
 
     reactionDisposer = reaction(
       (_)=> controller.logado, 
@@ -68,6 +71,15 @@ ReactionDisposer? reactionDisposer;
               })
             ),
             */
+            Padding(
+            padding: EdgeInsets.all(16),
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: "Nome"
+              ),
+              onChanged: controller.setNome,
+            )
+            ),
             Padding(
             padding: EdgeInsets.all(16),
             child: TextField(

@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_aula/controller.dart';
 import 'package:mobx_aula/item_controller.dart';
 import 'package:mobx_aula/principal_controller.dart';
+import 'package:provider/provider.dart';
 
 class Principal extends StatefulWidget {
   @override
@@ -49,10 +51,11 @@ class _PrincipalState extends State<Principal> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<Controller>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Tarefas",
+          controller.nome,
           style: TextStyle(fontSize: 25, color: Colors.white),
         ),
       ),
@@ -78,7 +81,7 @@ class _PrincipalState extends State<Principal> {
                   : null
               ),
             ),
-            leading: Checkbox(
+            leading: Checkbox( 
               value: item.marcado, 
               onChanged: (valor){
                 item.alterarMarcado(valor!);
